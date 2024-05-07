@@ -1,0 +1,85 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+@import 'ag-grid-community/styles/ag-grid.css';
+@import 'ag-grid-community/styles/ag-theme-quartz.css';
+@import '../node_modules/primeng/resources/themes/nano/theme.css';
+@import '../node_modules/primeng/resources/themes/arya-green/theme.css';
+@import '../node_modules/primeng/resources/primeng.css';
+@import '../node_modules/primeicons/primeicons.css';
+@import '../node_modules/primeng/resources/components/inputtext/inputtext.css';
+@import '../node_modules/primeng/resources/components/menu/menu.css';
+@import '../node_modules/primeng/resources/components/carousel/carousel.css';
+@import '../node_modules/primeng/resources/components/dialog/dialog.css';
+html,
+body{
+
+    margin : 0;
+    padding : 0;
+    box-sizing: border-box;
+    font-family: "Roboto Condensed", sans-serif;
+    font-optical-sizing:auto;
+    font-style:normal;
+}
+
+.headerText {
+    color : white;
+    margin-left : 20px;
+    margin-top : 13px;
+}
+
+html, body, app-root {
+    height : 100%;
+}
+
+.home {
+    display : flex;
+    width: 100%;
+    height : 100%
+}
+
+.items {
+  border: 1px solid black;
+  border-radius: 5px;
+  width : 10%;
+  margin : 10px;
+  height : 95.45%;
+}
+
+.ProjectMain {
+
+    width : 90%
+}
+
+.projectHeader, .projectDetail {
+    width : 98%;
+    height : 47%;
+    margin : 10px;
+}
+.headerWrap {
+    height : 100%;
+}
+.headerBand {
+    height : 10%;
+    background-color: rgb(94, 161, 94);
+    border : 1px solid rgb(94, 161, 94);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.headerBody {
+    height : 90%;
+    background-color: rgb(225, 238, 226);
+    text-align: center;
+    border:1px solid rgb(225, 238, 226);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.ag-theme-quartz
+{
+    height : 100%;
+}
+
+:host ::ng-deep .p-button{
+    font-size:5px;  //your font size here
+  }

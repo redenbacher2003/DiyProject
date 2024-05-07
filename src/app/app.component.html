@@ -1,0 +1,19 @@
+<!-- header-->
+<div class="home">
+  <div class="wrapItems">
+      <app-leftpane></app-leftpane>   
+  </div>
+  <div class="ProjectMain">
+    <div class="projectHeader">
+          <app-project (SelectProjectFromParent)="onProjectSelect($event)"></app-project>  
+    </div>
+      <div class="projectDetail">
+        <app-project-detail [project] = "project"></app-project-detail>
+      </div>
+  </div>
+</div>
+<!--wrapper-->
+<div class="wrapper">
+    <router-outlet />
+</div>
+

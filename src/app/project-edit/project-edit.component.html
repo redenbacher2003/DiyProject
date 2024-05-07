@@ -1,0 +1,38 @@
+<p-dialog 
+    [header] = "header"
+    [(visible)]="display" 
+    [modal] = "true" 
+    [closable]= "false">
+    <!--form-->
+    <div class ="column gap-1 form-wrapper" [formGroup] = "projectForm">
+        <div class="row gap-05">  
+            <span class="p-float-label">
+                <input pInputText id="Name" formControlName="Name" />
+                <label for="Name">Project Name</label>
+             </span>
+        </div>
+        <div class="row gap-05">
+            <span class="p-float-label">
+                <input type= "date" pInputText id="StartDate" formControlName="StartDate" />
+                <label for="StartDate">Start Date</label>
+             </span>
+        </div>
+        <div class="row gap-05">
+            <span class="p-float-label">
+                <input type= "date" pInputText id="FinishDate" formControlName="FinishDate" />
+                <label for="FinishDate">Finish Date</label>
+             </span>
+        </div>
+        <div class="row gap-05">
+            <span class="p-float-label">
+                <input pInputText id="thumbnail" formControlName="thumbnail" />
+                <label for="thumbnail">Thumbnail</label>
+             </span>
+        </div>
+    </div>
+    <p-footer>
+        <!--buttons-->
+        <button type= "button" pButton icon= "pi pi-check" (click)="onConfirm()" label="Confirm"></button>
+        <button type= "button" pButton icon= "pi pi-times" (click)="onCancel()" label="Cancel"></button>
+    </p-footer>
+</p-dialog>

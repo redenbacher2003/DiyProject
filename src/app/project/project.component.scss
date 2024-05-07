@@ -1,0 +1,23 @@
+.perProjectItem {
+    display: block;
+    height: 320px !important;
+}
+
+.headerTitleAndSearchContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height : 10%;
+}
+
+.headerSearch {
+    margin-left: auto;
+}
+.p-inputtext {
+    height : 27px;
+    margin-right: 25px;
+}
+
+.p-inputtext-sm{
+    border-radius: 7px;
+}

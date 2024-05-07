@@ -1,0 +1,44 @@
+<p-dialog 
+    [header] = "header"
+    [(visible)]="displayMaterial" 
+    [modal] = "true" 
+    [closable]= "false">
+    <!--form-->
+    <div class ="column gap-1 form-wrapper" [formGroup] = "projectMaterialGroup">
+        <div class="row gap-05">  
+            <span class="p-float-label">
+                <input pInputText id="Name" formControlName="materialName" />
+                <label for="Name">Material Name</label>
+             </span>
+        </div>
+        <div class="row gap-05">
+            <span class="p-float-label">
+                <input type="number" pInputText id="startDate" formControlName="quantity" />
+                <label for="startDate">Quantity</label>
+             </span>
+        </div>
+        <div class="row gap-05">
+            <span class="p-float-label">
+                <input type="number" min="0.00" max="10000.00" step="0.01" pInputText id="finishDate" formControlName="amount" />
+                <label for="finishDate">Amount</label>
+             </span>
+        </div>
+        <div class="row gap-05">
+            <span class="p-float-label">
+                <input pInputText id="thumbnail" formControlName="StoreName" />
+                <label for="thumbnail">Store Name</label>
+             </span>
+        </div>
+        <div class="row gap-05">
+            <span class="p-float-label">
+                <input type="date" pInputText id="purchaseDate" formControlName="purchaseDate" />
+                <label for="purchaseDate">Purchase Date</label>
+             </span>
+        </div>
+    </div>
+    <p-footer>
+        <!--buttons-->
+        <button type= "button" pButton icon= "pi pi-check" (click)="onConfirm()" label="Confirm"></button>
+        <button type= "button" pButton icon= "pi pi-times" (click)="onCancel()" label="Cancel"></button>
+    </p-footer>
+</p-dialog>

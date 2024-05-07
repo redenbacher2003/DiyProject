@@ -1,0 +1,29 @@
+<div class="headerWrap">
+    <div class="headerBand">
+        <div class="headerTitleAndSearchContainer">
+            <div class="headerText">
+                <p class="headerText">Project list</p>
+            </div>
+            <div class="headerSearch">
+                <span class="p-input-icon-left">     
+                    <i class="pi pi-search"></i>               
+                    <input pInputText class="p-inputtext-sm" type="text" [(ngModel)] = "searchValue" (ngModelChange)="SearchProject($event)"/>                    
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="headerBody">
+        <p-carousel [value]="projectItems" [numVisible]="4" [numScroll]="1" [circular]="true" [responsiveOptions]="carouselResponsiveOptions">
+            <ng-template let-projectItem pTemplate="item">
+                <div *ngIf="projectItem?.Name?.includes(this.searchValue) || this.searchValue === ''" class="projectItemContainer">
+                    <div class="perProjectItem">
+                        <app-project-item [project] = "projectItem" (SelectedProject) = "onSelected($event)" (editProject)="toggleEditPopup($event)"></app-project-item>
+                    </div>
+                </div>
+            </ng-template>
+        </p-carousel>            
+    </div>
+</div>
+
+<app-project-edit [header] ='editProjectHeader' [project] = "project" [(display)]="displayPopup"></app-project-edit> 
+

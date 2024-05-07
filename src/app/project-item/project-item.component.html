@@ -1,0 +1,10 @@
+<div class="projectItem">
+  <div class="imgWrap">
+      <img [src]="srcImage" alt="Project thumbnail">
+      <h3 class="title">{{project.Name}}</h3>
+    <div class="projectAction">
+      <p-button icon="pi pi-eye" [rounded]="true" [raised]="true" (onClick)="selectProject('view')"></p-button>
+      <p-button icon="pi pi-pencil" [rounded]="true" [raised]="true" (onClick)="selectProject('edit')"></p-button>
+    </div>
+  </div> 
+</div>
