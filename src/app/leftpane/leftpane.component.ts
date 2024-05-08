@@ -17,9 +17,8 @@ export class LeftpaneComponent {
 
     this.items = [
       { 
-              label : '[...]', 
-              icon : PrimeIcons.HOME ,
-              items: [ { label: 'New',
+              icon : PrimeIcons.HOME,
+              items: [ { label: 'New Project',
                          icon : PrimeIcons.PLUS  
                        }, 
                        { label: 'Edit',

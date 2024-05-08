@@ -64,7 +64,7 @@ export class ProjectComponent {
         }
       else 
         {
-          this.projectItems = this.projectItems.filter(p => {p.Name.toLowerCase().match(svalue.toLocaleLowerCase())}); 
+          this.projectItems = this.projectItems.filter(p => {p.Name.toLowerCase().match(svalue.toLowerCase())}); 
           console.log(this.searchValue);
         }
     }
