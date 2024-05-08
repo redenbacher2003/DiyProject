@@ -56,9 +56,17 @@ export class ProjectComponent {
                 );     
     }
 
-    SearchProject(svalue : any){
+    SearchProject(svalue : string){
       this.fetchProjects()
-      console.log(this.searchValue);
+      if (svalue == '')
+        {
+          this.fetchProjects();
+        }
+      else 
+        {
+          this.projectItems = this.projectItems.filter(p => {p.Name.toLowerCase().match(svalue.toLocaleLowerCase())}); 
+          console.log(this.searchValue);
+        }
     }
 
   public onSelected(fromChildProject: Project) : void {
