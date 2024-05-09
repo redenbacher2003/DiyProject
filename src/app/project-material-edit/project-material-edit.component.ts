@@ -58,8 +58,11 @@ export class ProjectMaterialEditComponent {
       this.displayMaterialChange.emit(this.displayMaterial);
     }
     ngOnChanges() {
-      this.projectMaterialGroup.patchValue(this.projectMaterial);
-      this.projectMaterialGroup.get('purchaseDate')?.patchValue(this.formatDate(this.projectMaterial.purchaseDate));
+      if (this.projectMaterial) 
+      {
+        this.projectMaterialGroup.patchValue(this.projectMaterial);
+        this.projectMaterialGroup.get('purchaseDate')?.patchValue(this.formatDate(this.projectMaterial.purchaseDate));
+      }
     }
 
     private formatDate(dateInput : string) {

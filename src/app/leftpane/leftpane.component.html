@@ -3,7 +3,8 @@
         <p class="headerText">Project</p>
     </div>
     <div class="dashboard">
-        <p-toast></p-toast>
-        <p-menu [model]="items"></p-menu>
+        <p-panelMenu [model]="items"  />
     </div>
 </div>
+
+<app-about [(display)]="displayAbout"></app-about>

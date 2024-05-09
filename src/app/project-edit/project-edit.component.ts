@@ -58,9 +58,12 @@ projectForm = new FormGroup({
     this.displayChange.emit(this.display);
   }
   ngOnChanges() {
-    this.projectForm.patchValue(this.project);
-    this.projectForm.get('StartDate')?.patchValue(this.formatDate(this.project.StartDate));
-    this.projectForm.get('FinishDate')?.patchValue(this.formatDate(this.project.FinishDate));
+    if (this.project) 
+      {
+        this.projectForm.patchValue(this.project);
+        this.projectForm.get('StartDate')?.patchValue(this.formatDate(this.project.StartDate));
+        this.projectForm.get('FinishDate')?.patchValue(this.formatDate(this.project.FinishDate));
+      }
   }
 
   private formatDate(dateInput : string) {
