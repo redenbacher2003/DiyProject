@@ -15,10 +15,10 @@ import { AboutComponent } from '../about/about.component';
 export class LeftpaneComponent {
   items : MenuItem[] = [];
   
-  displayAbout : boolean = true;
+  displayAbout : boolean = false;
 
   ngOnInit() {
-
+    this.displayAbout = false;
     this.items = [
       { 
               label : 'Home',
@@ -35,7 +35,7 @@ export class LeftpaneComponent {
                        }, 
                        { 
                           label: 'About',
-                          icon : PrimeIcons.INSTAGRAM,
+                          icon : PrimeIcons.INFO,
                           command : (this.launchAbout) 
                        } 
                      ], 
@@ -45,8 +45,8 @@ export class LeftpaneComponent {
      ]
   }
 
-  launchAbout() { 
-    this.displayAbout = true; 
+  launchAbout() {  
+     this.displayAbout = true;
   }
   
 

@@ -6,25 +6,30 @@
 
 .aboutTop {
  
+    display : flex;
     flex : 0 0 40%;
-   
-    color : grey;
-    justify-content: center; 
-    img {
+    justify-content: center;
+    align-items: center;
+    
+    .aboutImg {
         display: block;
-        max-width: 100%;
+        max-width: 90%;
         border-radius: 10px;
+        padding : 10px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        justify-self: center;
     }  
+    
 }
 
 .aboutRight {
     flex : 0 0 60%;
     max-width: 100%;
     padding-left: 10px;
-    line-height: 5px;
+    line-height: 17px;
     background-color:rgb(225, 238, 226);
     border-radius: 10px;
+    font-size: 13px;
 }
 .pi {
     margin-top: 10px;
@@ -32,7 +37,7 @@
 }
 
 
-#p-dialog
+.xx
 {
-    background-color: aquamarine;
+    width : 200px;
 }
