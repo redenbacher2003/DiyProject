@@ -1,7 +1,9 @@
 <p-dialog   
     [(visible)] = "display"
     closable="true"
-    header="about me">
+    header="about me"
+    (onHide)="cancel()"
+    [responsive]="true">
     <div class="imgAbout">
         <div class="aboutTop">           
             <img class ="aboutImg" [src]="aboutImg">
@@ -9,8 +11,8 @@
         <div class="aboutRight">
             <h4>Angular is fun!</h4>
             <p>An awesome diy'er, you gotta see my projects! Building websites</p> 
-            <p>using Angular and C# with Sql. Regularly updates gitHub.</p>
-        </div>   
+            <p>using Angular and C# with Sql. Regularly updates gitHub.</p>           
+        </div>           
     </div>
     <p-footer>
         <i class="pi pi-instagram"></i>
@@ -18,5 +20,6 @@
         <i class="pi pi-github"></i>
         <i class="pi pi-linkedin"></i>
         <i class="pi pi-envelope"></i>
+      
     </p-footer>
 </p-dialog>

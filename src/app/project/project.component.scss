@@ -13,6 +13,13 @@
 .headerSearch {
     margin-left: auto;
 }
+
+.headerDivText {
+    display : flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .p-inputtext {
     height : 27px;
     margin-right: 25px;
@@ -21,3 +28,4 @@
 .p-inputtext-sm{
     border-radius: 7px;
 }
+

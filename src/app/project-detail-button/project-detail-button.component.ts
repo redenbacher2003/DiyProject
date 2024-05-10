@@ -28,7 +28,6 @@ export class ProjectDetailButtonComponent implements ICellRendererAngularComp {
   buttonClicked() {
     this.SelectedRow = this.params.context.componentParent.getSelectedRows();
     console.log(this.SelectedRow);
- //   this.params.context.componentParent
   }
 
 }

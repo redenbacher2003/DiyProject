@@ -15,7 +15,8 @@ export class AboutComponent {
   headerAbout : string = "About";
   aboutImg : string = "http://10.39.1.10:8082/images/reden.jpg";
 
-  Close(){
+  cancel()
+  {
     this.display = false;
     this.displayChange.emit(this.display);
   }

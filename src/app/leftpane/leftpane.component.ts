@@ -36,7 +36,7 @@ export class LeftpaneComponent {
                        { 
                           label: 'About',
                           icon : PrimeIcons.INFO,
-                          command : (this.launchAbout) 
+                          command : ($event) => { this.launchAbout();} 
                        } 
                      ], 
               escape: true
