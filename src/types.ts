@@ -34,7 +34,7 @@ export interface ProjectMaterial {
 
     id? : number;
     Name : string;
-    diyProjectId : number;
+    diyProjectId? : number;
     materialName : string;
     quantity : number;
     amount : number;

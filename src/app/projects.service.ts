@@ -90,5 +90,19 @@ export class ProjectsService {
 
   }
 
+  AddDiyProjectMaterial = (projectMaterial : ProjectMaterial) : Observable<ProjectMaterial> => {
+    const apiUrl = this.baseUrl + 'AddProjectMaterial_async/';
+  
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+   console.log(JSON.stringify(projectMaterial));
+    return this.http.post(apiUrl,
+                         JSON.stringify(projectMaterial),
+                         { headers, 
+                           responseType : 'json' 
+                         },
+                      ) as Observable<ProjectMaterial>;
+
+  }
+
 
 }

@@ -54,6 +54,7 @@ export class ProjectDetailComponent {
   paginationPageSizeSelector =[8, 16, 24];
   projectMaterial! : ProjectMaterial;
   displayEditMaterial : boolean = false;
+  displayAddMaterial : boolean = false; 
   editProjectHeader : string = "Edit Material"; 
   constructor(private projectService : ProjectsService) { }
   
@@ -66,19 +67,6 @@ export class ProjectDetailComponent {
                   )
 
   } 
-  
-  // colDefs : ColDef []= [
- 
-  //                         { field: "Id", flex: .35},
-  //                         { field: "materialName", flex: 2.5, filter: true},
-  //                         { field: "quantity", flex: .75 },
-  //                         { field: "amount", valueFormatter: p => '$' + (p.value).toFixed(2), flex: .50 },
-  //                         { field: "StoreName", flex: 1, filter: true},
-  //                         { field: "purchaseDate", valueFormatter: p => (p.value).slice(0, 10), flex: 1 },
-  //                         { field: "added",valueFormatter: p => (p.value).slice(0, 10), flex: 1 },
-  //                         { field: "addedBy", flex: 1 }
-  //                     ]; 
-
 
   DiyProjectView () 
   { 
@@ -113,11 +101,28 @@ export class ProjectDetailComponent {
     console.log('selection triggered');
   }
   
-  editMaterial()
-  {
-      this.displayEditMaterial = true;
-  }
+  editMaterial(){
+      this.editProjectHeader = this.detailHeader
+      this.displayEditMaterial = true;   
+    }
+  addMaterial(){
+    this.projectMaterial = { 
+      id : 0,
+      Name : "",
+      diyProjectId : this.project.id,
+      materialName : "",
+      quantity : 0,
+      amount : 0.00,
+      StoreName : "",
+      purchaseDate : "",
+      added : new Date().toJSON(),
+      addedBy : "Reden"
+    };
 
+    this.editProjectHeader = this.detailHeader
+    this.displayEditMaterial = true;
+    this.isEditDisabled = true;  
+  }
   onGridReady(params: GridReadyEvent) {
     this.gridApi = params.api;
     this.gridApi.setGridOption("onRowClicked", (event: RowClickedEvent) => this.onselectionChange(event))

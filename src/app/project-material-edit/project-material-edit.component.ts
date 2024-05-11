@@ -21,6 +21,7 @@ export class ProjectMaterialEditComponent {
   @Input() displayMaterial : boolean = false;
   @Input() header! : string;
   @Output() displayMaterialChange = new EventEmitter<boolean>();
+  isEdit : boolean = true;
 
   projectMaterialGroup = new FormGroup ({
                                 materialName : new FormControl('') ,
@@ -40,13 +41,14 @@ export class ProjectMaterialEditComponent {
       this.projectMaterial.amount = this.projectMaterialGroup.get("amount")?.value || 0.00;
       this.projectMaterial.StoreName = this.projectMaterialGroup.get("StoreName")?.value || '';
       this.projectMaterial.purchaseDate = this.projectMaterialGroup.get("purchaseDate")?.value || '';
-
-     let result = this.projectService.updateProjectMaterialById(this.projectMaterial);
-    result 
+      console.log("onconfirm diyprojectid :" + this.projectMaterial.diyProjectId);
+     let result = this.projectMaterial.id == 0 ? 
+                  this.projectService.AddDiyProjectMaterial(this.projectMaterial) : this.projectService.updateProjectMaterialById(this.projectMaterial)
+     result 
     .subscribe(
       (data: any) => {
-                                this.projectMaterial = data;
-                          }     
+                       this.projectMaterial = data;
+                     }     
                               
     );     
     this.displayMaterial = false;
@@ -58,11 +60,10 @@ export class ProjectMaterialEditComponent {
       this.displayMaterialChange.emit(this.displayMaterial);
     }
     ngOnChanges() {
-      if (this.projectMaterial) 
-      {
-        this.projectMaterialGroup.patchValue(this.projectMaterial);
-        this.projectMaterialGroup.get('purchaseDate')?.patchValue(this.formatDate(this.projectMaterial.purchaseDate));
-      }
+      this.isEdit = this.projectMaterial?.id == 0  ? false : true ;
+      console.log('project id on changes : ' + this.projectMaterial.diyProjectId);
+      this.projectMaterialGroup.patchValue(this.projectMaterial);
+      this.projectMaterialGroup.get('purchaseDate')?.patchValue(this.formatDate(this.projectMaterial.purchaseDate));
     }
 
     private formatDate(dateInput : string) {
