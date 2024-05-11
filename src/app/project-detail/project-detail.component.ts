@@ -59,6 +59,7 @@ export class ProjectDetailComponent {
   constructor(private projectService : ProjectsService) { }
   
   ngOnChanges() { 
+   this.isEditDisabled = true;
    this.rowData = [];
    this.DiyProjectView() 
         .subscribe(
