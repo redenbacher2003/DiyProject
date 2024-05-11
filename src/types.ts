@@ -12,7 +12,7 @@ export interface Project {
     Name : string;
     StartDate : string;
     FinishDate : string;
-    Added : string;
+    addedDate : string;
     AddedBy : string;
     thumbnail : string;
 }

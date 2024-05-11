@@ -67,7 +67,6 @@ export class ProjectsService {
     const apiUrl = this.baseUrl + 'UpdateProjectMaterial_async/';
   
     const headers = new HttpHeaders().set('Content-Type', 'application/json'); 
-    console.log(JSON.stringify(projectMaterial));
     return this.http.put(apiUrl,
                          JSON.stringify(projectMaterial),
                          { headers, 
@@ -77,6 +76,19 @@ export class ProjectsService {
 
   }
  
+  AddDiyProject = (project : Project) : Observable<Project> => {
+    const apiUrl = this.baseUrl + 'createProject_Async/';
+  
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+   
+    return this.http.post(apiUrl,
+                         JSON.stringify(project),
+                         { headers, 
+                           responseType : 'json' 
+                         },
+                      ) as Observable<Project>;
+
+  }
 
 
 }

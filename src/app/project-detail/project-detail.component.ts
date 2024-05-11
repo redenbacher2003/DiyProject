@@ -25,6 +25,7 @@ export class ProjectDetailComponent {
 
   @Input() project! : Project;
   @Output() public SelectProjectMaterialFromParent: EventEmitter<ProjectMaterial> = new EventEmitter();
+  isEditDisabled : boolean = true;
   private gridApi!: GridApi;
   public columnDefs : ColDef[] = [
                                { field: "Id", flex: .35},
@@ -101,13 +102,15 @@ export class ProjectDetailComponent {
     this.projectMaterial = fromChildProjectMaterial;
     this.SelectProjectMaterialFromParent.emit(this.projectMaterial);
     this.displayEditMaterial = true; 
-    console.log('triggered');
+    console.log('edit triggered');
   }
 
   
   onselectionChange(event : any)
   {
+    this.isEditDisabled = false;
     this.projectMaterial = event.data;
+    console.log('selection triggered');
   }
   
   editMaterial()

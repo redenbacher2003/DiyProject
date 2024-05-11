@@ -24,47 +24,47 @@ export class ProjectEditComponent {
   @Input() display : boolean = false;
   @Input() header! : string;
   @Output() displayChange = new EventEmitter<boolean>();
-
+  isEdit : boolean = true;
 projectForm = new FormGroup({
                             Name : new FormControl('') ,
                             StartDate  : new FormControl(''),
                             FinishDate : new FormControl(''),
                             thumbnail : new FormControl('')
                             });
+                        
+   onConfirm () {
+      console.log('edit triggered');
+      this.project.Name = this.projectForm.get("Name")?.value || '';
+      this.project.StartDate  = this.projectForm.get("StartDate")?.value || '';
+      this.project.FinishDate = this.projectForm.get("FinishDate")?.value || '';
+      this.project.thumbnail = this.projectForm.get("thumbnail")?.value || '';
 
-  onConfirm ()
-  {
-    console.log('edit triggered');
-    this.project.Name = this.projectForm.get("Name")?.value || '';
-    this.project.StartDate  = this.projectForm.get("StartDate")?.value || '';
-    this.project.FinishDate = this.projectForm.get("FinishDate")?.value || '';
-    this.project.thumbnail = this.projectForm.get("thumbnail")?.value || '';
+      let result = this.project.id == 0 ? this.projectsService.AddDiyProject(this.project) : this.projectsService.updateProjectById(this.project)
+      result 
+      .subscribe(
+        (projects : any) => {
+                                  this.project = projects;
+                            }     
+                                
+      );     
+      this.display = false;
+      this.displayChange.emit(this.display);
+  }
 
-    let result = this.projectsService.updateProjectById(this.project);
-    result 
-    .subscribe(
-      (projects : any) => {
-                                this.project = projects;
-                          }     
-                              
-    );     
+  onCancel() {  
     this.display = false;
     this.displayChange.emit(this.display);
   }
 
-  onCancel() 
-  {  
-    this.display = false;
-    this.displayChange.emit(this.display);
-  }
   ngOnChanges() {
-    if (this.project) 
+    this.isEdit = this.project?.id == undefined  ? false : true ;
+    if (this.isEdit) 
       {
         this.projectForm.patchValue(this.project);
         this.projectForm.get('StartDate')?.patchValue(this.formatDate(this.project.StartDate));
         this.projectForm.get('FinishDate')?.patchValue(this.formatDate(this.project.FinishDate));
       }
-  }
+   }
 
   private formatDate(dateInput : string) {
    return dateInput.substring(0,4) + "-" + dateInput.substring(5,7) + "-" + dateInput.substring(8,10) ;  

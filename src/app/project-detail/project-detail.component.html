@@ -1,6 +1,6 @@
 <div class="btn-operation">
   <p-button icon="pi pi-plus" [rounded]="false" [raised]="true" [disabled] = "true"></p-button>
-  <p-button icon="pi pi-pencil" [rounded]="false" [raised]="true" (onClick)="editMaterial()"></p-button>
+  <p-button icon="pi pi-pencil" [rounded]="false" [raised]="true" [disabled] = "isEditDisabled" (onClick)="editMaterial()"></p-button>
   <p-button icon="pi pi-trash" [rounded]="false" [raised]="true" [disabled] = "true"></p-button>
   <h2 class="projectDetailHeader">{{detailHeader}}</h2>
 </div>
