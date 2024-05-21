@@ -53,7 +53,6 @@ export class ProjectsService {
     const apiUrl = this.baseUrl + 'UpdateProject_async/';
   
     const headers = new HttpHeaders().set('Content-Type', 'application/json'); 
-    console.log(JSON.stringify(project));
     return this.http.put(apiUrl,
                          JSON.stringify(project),
                          { headers, 
@@ -94,13 +93,42 @@ export class ProjectsService {
     const apiUrl = this.baseUrl + 'AddProjectMaterial_async/';
   
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-   console.log(JSON.stringify(projectMaterial));
     return this.http.post(apiUrl,
                          JSON.stringify(projectMaterial),
                          { headers, 
                            responseType : 'json' 
                          },
                       ) as Observable<ProjectMaterial>;
+
+  }
+  // will either Add or Update current object vs new object 
+  updateProject(currentData : Project, newData : Project) : boolean 
+  {    
+      currentData.id = newData.id;
+      currentData.Name = newData.Name;
+      currentData.StartDate = newData.StartDate;
+      currentData.FinishDate = newData.FinishDate;
+      currentData.thumbnail = newData.thumbnail;
+      currentData.addedDate = newData.addedDate;
+      currentData.AddedBy = newData.AddedBy;              
+    return true;
+
+  }
+
+  updateProjectMaterial(currentData : ProjectMaterial, newData : ProjectMaterial) : boolean 
+  {    
+      currentData.Id = newData.Id;
+      currentData.Name = newData.Name;
+      currentData.materialName = newData.materialName;
+      currentData.StoreName = newData.StoreName;
+      currentData.diyProjectId = newData.diyProjectId;
+      currentData.amount = newData.amount;
+      currentData.addedBy = newData.addedBy;
+      currentData.added = newData.added;
+      currentData.purchaseDate = newData.purchaseDate;
+      currentData.quantity = newData.quantity;
+                     
+    return true;
 
   }
 

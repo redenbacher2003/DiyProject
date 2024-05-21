@@ -24,6 +24,8 @@ export class ProjectEditComponent {
   @Input() display : boolean = false;
   @Input() header! : string;
   @Output() displayChange = new EventEmitter<boolean>();
+  @Output() projectChange = new EventEmitter<Project>();
+  //@Output() displayChange = new EventEmitter<Project>();
   isEdit : boolean = true;
 projectForm = new FormGroup({
                             Name : new FormControl('') ,
@@ -42,13 +44,15 @@ projectForm = new FormGroup({
       let result = this.project.id == 0 ? this.projectsService.AddDiyProject(this.project) : this.projectsService.updateProjectById(this.project)
       result 
       .subscribe(
-        (projects : any) => {
-                                  this.project = projects;
+        (updatedProject : any) => {
+                                  this.project = updatedProject;
+                                  this.projectChange.emit(updatedProject);
                             }     
                                 
       );     
       this.display = false;
       this.displayChange.emit(this.display);
+      
   }
 
   onCancel() {  
@@ -57,6 +61,7 @@ projectForm = new FormGroup({
   }
 
   ngOnChanges() {
+    console.log('display : ' + this.display);
     this.isEdit = this.project?.id == undefined  ? false : true ;
     if (this.isEdit) 
       {

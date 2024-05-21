@@ -13,7 +13,7 @@ export class AboutComponent {
   @Input() display : boolean = false; 
   @Output() displayChange = new EventEmitter<boolean>();
   headerAbout : string = "About";
-  aboutImg : string = "http://10.39.1.10:8082/images/reden.jpg";
+  aboutImg : string = "http://10.39.1.10:8082/images/about.jpg";
 
   cancel()
   {

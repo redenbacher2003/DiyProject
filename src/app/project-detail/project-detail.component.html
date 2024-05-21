@@ -11,11 +11,14 @@
     [defaultColDef]="defaultColDef"
     [class]="themeClass"
     (gridReady)="onGridReady($event)"
+    [rowSelection]="'single'"
    > 
  </ag-grid-angular>
  
  <app-project-material-edit 
                             [header] ='editProjectHeader' 
-                            [projectMaterial] = "projectMaterial" 
-                            [(displayMaterial)] = "displayEditMaterial">
+                            [(projectMaterial)] = "projectMaterial" 
+                            [displayMaterial] = "displayEditMaterial"
+                            (displayMaterialChange)="materialCallBack($event)">
+                            
   </app-project-material-edit>

@@ -3,7 +3,6 @@ import { ProjectItemComponent } from '../project-item/project-item.component';
 import { NgFor, NgIf } from '@angular/common';
 import { Project } from '../../types';
 import { ProjectsService } from '../projects.service';
-import { Projects } from '../../types';
 import { CarouselModule } from 'primeng/carousel';
 import { HttpClientModule } from '@angular/common/http';
 import { InputTextModule } from 'primeng/inputtext';
@@ -77,12 +76,14 @@ export class ProjectComponent {
   public onEdit(fromChildProject : Project) : void {
     this.project = fromChildProject;
     this.SelectProjectFromParent.emit(this.project);
+    
   }
-
 
   toggleEditPopup(project : Project){
     this.project = project;
     this.displayPopup = true; 
+    console.log('edit was triggered');
   }
+
  
 }

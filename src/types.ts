@@ -21,18 +21,10 @@ export interface ProjectMaterials {
     items : ProjectMaterial[] 
     total : number;
 }
-export interface ProjectMaterialx {
-
-    materialName : string;
-    quantity : number;
-    amount : number;
-    StoreName : string;
-    purchaseDate : string;
-}
 
 export interface ProjectMaterial {
 
-    id? : number;
+    Id? : number;
     Name : string;
     diyProjectId? : number;
     materialName : string;

@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 import { ProjectDetailButtonComponent } from '../project-detail-button/project-detail-button.component';
 import { ProjectMaterialEditComponent } from '../project-material-edit/project-material-edit.component';
 import { ButtonModule } from 'primeng/button';
-import { ColDef, GridApi, GridReadyEvent, ModuleRegistry, RowClickedEvent } from "ag-grid-community";
+import { ColDef, GridApi, GridReadyEvent, ModuleRegistry, QuerySelector, RowClickedEvent, RedrawRowsParams, RowNode} from "ag-grid-community";
 import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-model";
 import { AgGridAngular, AgGridModule } from 'ag-grid-angular';
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
@@ -32,7 +32,7 @@ export class ProjectDetailComponent {
                                { field: "materialName", flex: 2.5, filter: true},
                                { field: "quantity", flex: .75 },
                                { field: "amount", valueFormatter: p => '$' + (p.value).toFixed(2), flex: .50 },
-                               { field: "StoreName", flex: 1, filter: true},
+                               { field: "storeName", flex: 1, filter: true},
                                { field: "purchaseDate", valueFormatter: p => (p.value).slice(0, 10), flex: 1 },
                                { field: "added",valueFormatter: p => (p.value).slice(0, 10), flex: 1 },
                                { field: "addedBy", flex: 1 }
@@ -41,9 +41,8 @@ export class ProjectDetailComponent {
   public defaultColDef: ColDef = {flex: 1 };
   public rowSelection = "single | multiple";
   public onSelectionChanged = "onselectionChange"; 
-  //public getRowId: GetRowIdFunc = (params: GetRowIdParams) => params.data.id;
   public themeClass: string = "ag-theme-quartz";
- 
+
   public detailHeader : string = ""; 
   projectId : number = 0;
   diyProjectmaterials! : ProjectMaterials;
@@ -56,15 +55,23 @@ export class ProjectDetailComponent {
   displayEditMaterial : boolean = false;
   displayAddMaterial : boolean = false; 
   editProjectHeader : string = "Edit Material"; 
-  constructor(private projectService : ProjectsService) { }
+  constructor(private projectService : ProjectsService) { 
+    
+
+  }
   
+
+
   ngOnChanges() { 
+ 
    this.isEditDisabled = true;
    this.rowData = [];
    this.DiyProjectView() 
         .subscribe(
                      (data : ProjectMaterials) => 
-                         {this.rowData = data}
+                         {                            
+                          this.rowData = data;
+                         }
                   )
 
   } 
@@ -99,16 +106,15 @@ export class ProjectDetailComponent {
   {
     this.isEditDisabled = false;
     this.projectMaterial = event.data;
-    console.log('selection triggered');
   }
   
   editMaterial(){
       this.editProjectHeader = this.detailHeader
-      this.displayEditMaterial = true;   
+      this.displayEditMaterial = true;
     }
   addMaterial(){
     this.projectMaterial = { 
-      id : 0,
+      Id : 0,
       Name : "",
       diyProjectId : this.project.id,
       materialName : "",
@@ -124,6 +130,12 @@ export class ProjectDetailComponent {
     this.displayEditMaterial = true;
     this.isEditDisabled = true;  
   }
+
+  materialCallBack(event : any) {
+    this.displayEditMaterial = false;  
+  } 
+
+
   onGridReady(params: GridReadyEvent) {
     this.gridApi = params.api;
     this.gridApi.setGridOption("onRowClicked", (event: RowClickedEvent) => this.onselectionChange(event))
