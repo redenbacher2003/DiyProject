@@ -9,6 +9,8 @@ import { ButtonModule } from 'primeng/button';
 import { ColDef, GridApi, GridReadyEvent, ModuleRegistry, QuerySelector, RowClickedEvent, RedrawRowsParams, RowNode} from "ag-grid-community";
 import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-model";
 import { AgGridAngular, AgGridModule } from 'ag-grid-angular';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
 
 let gridApi: GridApi<ProjectMaterial>;
@@ -16,7 +18,8 @@ let gridApi: GridApi<ProjectMaterial>;
 @Component({
   selector: 'app-project-detail',
   standalone: true,
-  imports: [ProjectDetailButtonComponent, ProjectMaterialEditComponent, ButtonModule, AgGridModule, AgGridAngular],
+  imports: [ProjectDetailButtonComponent, ProjectMaterialEditComponent, ButtonModule, AgGridModule, AgGridAngular, ToastModule],
+  providers : [MessageService],
   templateUrl: './project-detail.component.html',
   styleUrl: './project-detail.component.scss'
 })
@@ -55,7 +58,7 @@ export class ProjectDetailComponent {
   displayEditMaterial : boolean = false;
   displayAddMaterial : boolean = false; 
   editProjectHeader : string = "Edit Material"; 
-  constructor(private projectService : ProjectsService) { 
+  constructor(private projectService : ProjectsService, private messageService : MessageService) { 
     
 
   }
@@ -120,7 +123,7 @@ export class ProjectDetailComponent {
       materialName : "",
       quantity : 0,
       amount : 0.00,
-      StoreName : "",
+      storeName : "",
       purchaseDate : "",
       added : new Date().toJSON(),
       addedBy : "Reden"
@@ -133,6 +136,17 @@ export class ProjectDetailComponent {
 
   materialCallBack(event : any) {
     this.displayEditMaterial = false;  
+    if (event == 'confirm')
+      {
+        console.log('will refresh');
+        
+        setTimeout(() => {
+          this.ngOnChanges();
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Project Material Saved!' });
+        }, 10);
+          
+       
+       }
   } 
 
 

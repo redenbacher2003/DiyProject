@@ -30,7 +30,7 @@ export interface ProjectMaterial {
     materialName : string;
     quantity : number;
     amount : number;
-    StoreName : string;
+    storeName : string;
     purchaseDate : string;
     added : string;
     addedBy : string

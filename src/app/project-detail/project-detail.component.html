@@ -4,7 +4,7 @@
   <p-button icon="pi pi-trash" [rounded]="false" [raised]="true" [disabled] = "true"></p-button>
   <h2 class="projectDetailHeader">{{detailHeader}}</h2>
 </div>
-
+<p-toast />
 <ag-grid-angular class="ag-theme-quartz" 
     [columnDefs]="columnDefs"
     [rowData]="rowData"
@@ -22,3 +22,4 @@
                             (displayMaterialChange)="materialCallBack($event)">
                             
   </app-project-material-edit>
+  

@@ -12,6 +12,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ProjectMaterial } from '../../types';
 import { ProjectsService } from '../projects.service';
 
+
 @Component({
   selector: 'app-project-material-edit',
   standalone: true,
@@ -53,7 +54,7 @@ export class ProjectMaterialEditComponent {
       this.projectMaterialGroup.get('quantity')?.value || 0;
     this.projectMaterial.amount =
       this.projectMaterialGroup.get('amount')?.value || 0.0;
-    this.projectMaterial.StoreName =
+    this.projectMaterial.storeName =
       this.projectMaterialGroup.get('storeName')?.value || '';
     this.projectMaterial.purchaseDate =
       this.projectMaterialGroup.get('purchaseDate')?.value || '';
@@ -68,6 +69,7 @@ export class ProjectMaterialEditComponent {
     this.displayMaterial = false;
     this.displayMaterialChange.emit('confirm');
     this.projectMaterialChange.emit(this.projectMaterial);
+    
   }
   onCancel() {
     this.displayMaterial = false;

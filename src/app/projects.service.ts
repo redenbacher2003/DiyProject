@@ -120,7 +120,7 @@ export class ProjectsService {
       currentData.Id = newData.Id;
       currentData.Name = newData.Name;
       currentData.materialName = newData.materialName;
-      currentData.StoreName = newData.StoreName;
+      currentData.storeName = newData.storeName;
       currentData.diyProjectId = newData.diyProjectId;
       currentData.amount = newData.amount;
       currentData.addedBy = newData.addedBy;
