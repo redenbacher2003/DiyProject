@@ -7,22 +7,26 @@ import { HttpClientModule } from '@angular/common/http';
 import { Project } from '../types';
 import { ProjectsService } from './projects.service';
 
-
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, LeftpaneComponent, ProjectComponent, ProjectDetailComponent, HttpClientModule],
+  imports: [
+    RouterOutlet,
+    LeftpaneComponent,
+    ProjectComponent,
+    ProjectDetailComponent,
+    HttpClientModule,
+  ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
-
-  constructor(private projectsService: ProjectsService){}
+  constructor(private projectsService: ProjectsService) {}
 
   title = 'DiyProject';
-  project! : Project; 
+  project!: Project;
 
-  onProjectSelect(projectFromComponent: Project) : void {
+  onProjectSelect(projectFromComponent: Project): void {
     this.project = projectFromComponent;
   }
 }

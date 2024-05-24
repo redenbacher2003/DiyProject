@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, NgModule} from '@angular/core';
+import { Component, Output, EventEmitter, NgModule } from '@angular/core';
 import { ProjectItemComponent } from '../project-item/project-item.component';
 import { NgFor, NgIf } from '@angular/common';
 import { Project } from '../../types';
@@ -14,76 +14,75 @@ import { ProjectMaterialEditComponent } from '../project-material-edit/project-m
 @Component({
   selector: 'app-project',
   standalone: true,
-  imports: [ProjectItemComponent, NgFor, CarouselModule, HttpClientModule, InputTextModule, ButtonModule, FormsModule, NgIf, ProjectEditComponent, ProjectMaterialEditComponent],
-  providers :[ProjectsService],
-  templateUrl: './project.component.html',  
-  styleUrl: './project.component.scss'
+  imports: [
+    ProjectItemComponent,
+    NgFor,
+    CarouselModule,
+    HttpClientModule,
+    InputTextModule,
+    ButtonModule,
+    FormsModule,
+    NgIf,
+    ProjectEditComponent,
+    ProjectMaterialEditComponent,
+  ],
+  providers: [ProjectsService],
+  templateUrl: './project.component.html',
+  styleUrl: './project.component.scss',
 })
-
-
 export class ProjectComponent {
   hidePaginator = true;
-  projectItems : Project[] = []; 
-  project! : Project;
-  searchValue : string = "";
-  displayPopup : boolean = false;
-  editProjectHeader : string = "Edit Project"; 
-  carouselResponsiveOptions : any[] = [
-  {
-       
-        numVisible: 6, 
-        numScroll: 5
-  } 
-]
+  projectItems: Project[] = [];
+  project!: Project;
+  searchValue: string = '';
+  displayPopup: boolean = false;
+  editProjectHeader: string = 'Edit Project';
+  carouselResponsiveOptions: any[] = [
+    {
+      numVisible: 6,
+      numScroll: 5,
+    },
+  ];
   constructor(private projectsService: ProjectsService) {}
 
-  @Output() public SelectProjectFromParent: EventEmitter<Project> = new EventEmitter();
+  @Output() public SelectProjectFromParent: EventEmitter<Project> =
+    new EventEmitter();
 
-
-  ngOnInit() {  
+  ngOnInit() {
     this.fetchProjects();
   }
 
-    fetchProjects() {
-      this.projectsService 
-      .getProjects()
-      .subscribe(
-                  (projects : any) => {
-                                            this.projectItems = projects;
-                                      }     
-                                          
-                );     
-    }
-
-    SearchProject(svalue : string){
-      this.fetchProjects()
-      if (svalue == '')
-        {
-          this.fetchProjects();
-        }
-      else 
-        {
-          this.projectItems = this.projectItems.filter(p => p.Name.toLowerCase().includes(svalue.toLowerCase())); 
-          console.log(svalue.toLowerCase());
-        }
-    }
-
-  public onSelected(fromChildProject: Project) : void {
-    this.project = fromChildProject;
-    this.SelectProjectFromParent.emit(this.project);
- }
-
-  public onEdit(fromChildProject : Project) : void {
-    this.project = fromChildProject;
-    this.SelectProjectFromParent.emit(this.project);
-    
+  fetchProjects() {
+    this.projectsService.getProjects().subscribe((projects: any) => {
+      this.projectItems = projects;
+    });
   }
 
-  toggleEditPopup(project : Project){
+  SearchProject(svalue: string) {
+    this.fetchProjects();
+    if (svalue == '') {
+      this.fetchProjects();
+    } else {
+      this.projectItems = this.projectItems.filter((p) =>
+        p.Name.toLowerCase().includes(svalue.toLowerCase())
+      );
+      console.log(svalue.toLowerCase());
+    }
+  }
+
+  public onSelected(fromChildProject: Project): void {
+    this.project = fromChildProject;
+    this.SelectProjectFromParent.emit(this.project);
+  }
+
+  public onEdit(fromChildProject: Project): void {
+    this.project = fromChildProject;
+    this.SelectProjectFromParent.emit(this.project);
+  }
+
+  toggleEditPopup(project: Project) {
     this.project = project;
-    this.displayPopup = true; 
+    this.displayPopup = true;
     console.log('edit was triggered');
   }
-
- 
 }

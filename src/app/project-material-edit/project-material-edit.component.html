@@ -35,8 +35,20 @@
         </div>
     </div>
     <p-footer>
-        <!--buttons-->
-        <button type= "button" pButton icon= "pi pi-check" (click)="onConfirm()" label="Confirm"></button>
+        <!--buttons
+            <button type= "button" pButton icon= "pi pi-check" (click)="GetConfirm()" label="Confirm"></button>
         <button type= "button" pButton icon= "pi pi-times" (click)="onCancel()" label="Cancel"></button>
+        -->
+        <div class="card flex justify-content-center gap-2">
+            <p-confirmDialog />
+            <p-button (click)="SaveConfirm($event)" label="Save" [outlined]="false" />
+            <p-button (click)="onCancel()" label="Cancel" severity="secondary" [outlined]="false" />
+        </div>
     </p-footer>
+
+
+        
+
+
+
 </p-dialog>

@@ -11,7 +11,8 @@ import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { ProjectMaterial } from '../../types';
 import { ProjectsService } from '../projects.service';
-
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-project-material-edit',
@@ -23,12 +24,17 @@ import { ProjectsService } from '../projects.service';
     DialogModule,
     InputTextModule,
     FormsModule,
+    ConfirmDialogModule,
   ],
+  providers: [ConfirmationService],
   templateUrl: './project-material-edit.component.html',
   styleUrl: './project-material-edit.component.scss',
 })
 export class ProjectMaterialEditComponent {
-  constructor(private projectService: ProjectsService) {}
+  constructor(
+    private projectService: ProjectsService,
+    private confirmationService: ConfirmationService
+  ) {}
 
   @Input() projectMaterial!: ProjectMaterial;
   @Input() displayMaterial: boolean = false;
@@ -69,7 +75,6 @@ export class ProjectMaterialEditComponent {
     this.displayMaterial = false;
     this.displayMaterialChange.emit('confirm');
     this.projectMaterialChange.emit(this.projectMaterial);
-    
   }
   onCancel() {
     this.displayMaterial = false;
@@ -93,5 +98,21 @@ export class ProjectMaterialEditComponent {
       '-' +
       dateInput.substring(8, 10)
     );
+  }
+
+  SaveConfirm(event: Event) {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: "Save material for project " + this.header,
+      header: 'Confirmation',
+      icon: 'none',
+      acceptIcon: 'none',
+      rejectIcon: 'none',
+      rejectButtonStyleClass: 'p-button-text',
+      accept: () => {
+        this.onConfirm();
+      },
+      reject: () => {},
+    });
   }
 }
