@@ -4,10 +4,11 @@ import { ButtonModule } from 'primeng/button';
 import { ProjectsService } from '../projects.service';
 import { EventEmitter } from '@angular/core';
 import { ProjectEditComponent } from '../project-edit/project-edit.component';
+import { TooltipModule } from 'primeng/tooltip';
 @Component({
   selector: 'app-project-item',
   standalone: true,
-  imports: [ButtonModule, ProjectEditComponent],
+  imports: [ButtonModule, ProjectEditComponent, TooltipModule],
   templateUrl: './project-item.component.html',
   styleUrl: './project-item.component.scss',
 })
@@ -20,6 +21,8 @@ export class ProjectItemComponent {
   @Input() project!: Project;
   @Output() public SelectedProject: EventEmitter<Project> = new EventEmitter();
   @Output() public editProject: EventEmitter<Project> = new EventEmitter();
+  @Output() public viewGallery: EventEmitter<Project> = new EventEmitter();
+
   displayPopup: boolean = false;
 
   ngOnInit() {
@@ -29,10 +32,19 @@ export class ProjectItemComponent {
   }
 
   selectProject(action: string) {
-    if (action === 'view') {
-      this.SelectedProject.emit(this.project);
-    } else {
-      this.editProject.emit(this.project);
+    switch (action) {
+      case 'view': {
+        this.SelectedProject.emit(this.project);
+        break;
+      }
+      case 'edit': {
+        this.editProject.emit(this.project);
+        break;
+      }
+
+      default:
+        this.viewGallery.emit(this.project);
+        break;
     }
 
     console.log(action);

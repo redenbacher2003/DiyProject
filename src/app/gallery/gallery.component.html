@@ -1,0 +1,34 @@
+<p-dialog 
+    [header] = "header"
+    [(visible)]="display" 
+    [modal] = "true" 
+    [closable]= "true"
+    (onHide)="cancel()"
+    [responsive]="true"
+    class="galleryContainer">
+    <ng-template pTemplate="header">
+        <div class="inline-flex align-items-center justify-content-center gap-2">           
+            <p-avatar 
+                        icon="pi pi-image"
+                        shape="circle" />
+            <span class="font-bold white-space-nowrap">End Table</span>
+        </div>
+    </ng-template>
+    <div class="gallerywrap">    
+        <p-galleria 
+            [value]="images" 
+            [responsiveOptions]="responsiveOptions" 
+            [containerStyle]="{ 'max-width': '500px', 'height' : '100%' }" 
+            [numVisible]="5"
+            [showItemNavigators]="true">
+                <ng-template pTemplate="item" let-item>
+                    <img [src]= "getImgSrc(item.image)" style="width: 100%;" />
+                </ng-template>
+                <ng-template pTemplate="thumbnail" let-item>
+                    <div class="grid grid-nogutter justify-content-center">
+                        <img [src]= "getImgSrc(item.imageThumbnail)" style="width: 100%"/>
+                    </div>
+                </ng-template>
+        </p-galleria>
+    </div>  
+</p-dialog>

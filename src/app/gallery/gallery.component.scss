@@ -1,0 +1,37 @@
+:host ::ng-deep { 
+   
+    .p-dialog-draggable .p-dialog-header { 
+        background-color: black !important; 
+    } 
+    .p-dialog-title { 
+        color: white !important; 
+    } 
+    .p-dialog .p-dialog-content { 
+        background: black !important; 
+        color: white !important; 
+    } 
+    .p-dialog .p-dialog-footer { 
+        background: black !important; 
+    } 
+    .p-dialog .p-dialog-header .p-dialog-header-icon:focus { 
+        box-shadow: 0 0 0 0.2rem white !important; 
+        color: white !important; 
+    } 
+    button.p-ripple.p-element.p-dialog-header-icon.p-dialog-header-close { 
+        color: white !important; 
+    } 
+    .p-dialog .p-dialog-header .p-dialog-header-icon:enabled:hover { 
+        background: white !important; 
+        color: white !important; 
+    } 
+   
+    .font-bold {
+        font-weight: bold;
+        color : white;
+    }
+
+    .inline-flex {
+        display : flex;
+        gap : 10px;
+    }
+}

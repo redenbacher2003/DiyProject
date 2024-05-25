@@ -39,3 +39,16 @@ export interface responsiveOptions {
   numVisible: number;
   numScroll: number;
 }
+
+
+export interface galleries {
+  galleries : gallery[]
+}
+
+export interface gallery {
+  id : number;
+  ProjectId : number;
+  imageType : string; 
+  image : string;
+  imageThumbnail : string;
+}

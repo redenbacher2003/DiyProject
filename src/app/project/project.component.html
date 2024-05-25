@@ -17,7 +17,7 @@
             <ng-template let-projectItem pTemplate="item">
                 <div *ngIf="projectItem?.Name?.includes(this.searchValue) || this.searchValue === ''" class="projectItemContainer">
                     <div class="perProjectItem">
-                        <app-project-item [project] = "projectItem" (SelectedProject) = "onSelected($event)" (editProject)="toggleEditPopup($event)"></app-project-item>
+                        <app-project-item [project] = "projectItem" (SelectedProject) = "onSelected($event)" (editProject)="toggleEditPopup($event)" (viewGallery)="toggleGallery($event)"></app-project-item>
                     </div>
                 </div>
             </ng-template>
@@ -27,3 +27,4 @@
 
 <app-project-edit [header] ='editProjectHeader' [project] = "project" [(display)]="displayPopup"></app-project-edit> 
 
+<app-gallery [header] = 'editProjectHeader' [project] = "project" [(display)]="displayGallery"></app-gallery>

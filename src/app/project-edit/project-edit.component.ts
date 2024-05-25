@@ -37,7 +37,7 @@ export class ProjectEditComponent {
   @Input() header!: string;
   @Output() displayChange = new EventEmitter<boolean>();
   @Output() projectChange = new EventEmitter<Project>();
-  //@Output() displayChange = new EventEmitter<Project>();
+
   isEdit: boolean = true;
   projectForm = new FormGroup({
     Name: new FormControl(''),

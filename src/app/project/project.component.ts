@@ -10,6 +10,7 @@ import { ButtonModule } from 'primeng/button';
 import { FormsModule, NgModel } from '@angular/forms';
 import { ProjectEditComponent } from '../project-edit/project-edit.component';
 import { ProjectMaterialEditComponent } from '../project-material-edit/project-material-edit.component';
+import { GalleryComponent } from '../gallery/gallery.component';
 
 @Component({
   selector: 'app-project',
@@ -25,6 +26,7 @@ import { ProjectMaterialEditComponent } from '../project-material-edit/project-m
     NgIf,
     ProjectEditComponent,
     ProjectMaterialEditComponent,
+    GalleryComponent
   ],
   providers: [ProjectsService],
   templateUrl: './project.component.html',
@@ -36,6 +38,7 @@ export class ProjectComponent {
   project!: Project;
   searchValue: string = '';
   displayPopup: boolean = false;
+  displayGallery : boolean = false;
   editProjectHeader: string = 'Edit Project';
   carouselResponsiveOptions: any[] = [
     {
@@ -84,5 +87,10 @@ export class ProjectComponent {
     this.project = project;
     this.displayPopup = true;
     console.log('edit was triggered');
+  }
+
+  toggleGallery(project: Project) {
+    this.project = project;   
+    this.displayGallery = true; 
   }
 }

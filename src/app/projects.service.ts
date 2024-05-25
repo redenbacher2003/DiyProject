@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, map, pipe } from 'rxjs';
-import { ProjectMaterials, Projects, ProjectMaterial, Project} from '../types';
+import { ProjectMaterials, Projects, ProjectMaterial, Project, gallery} from '../types';
 import { HttpClientModule } from '@angular/common/http';
 import { observeNotification } from 'rxjs/internal/Notification';
 import { query } from '@angular/animations';
@@ -132,5 +132,25 @@ export class ProjectsService {
 
   }
 
+  getGalleryThumbnails = () : Observable<gallery> => { 
+
+    const apiUrl = this.baseUrl + 'GetProjectThumbnails_Async/';
+
+    return this.http.get(apiUrl, { 
+      responseType : 'json'
+    }) as Observable<gallery>;
+  }
+
+  getGalleryImages = (projectid : number) : Observable<gallery> => { 
+       
+    const apiUrl = this.baseUrl + 'GetProjectGalleryImagesByProjectId_Async/';
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append('projectId', projectid); // Append the 'id' 
+
+    return this.http.get(apiUrl, 
+      { responseType : 'json',
+       params : queryParams
+      }) as Observable<gallery>;
+  }
 
 }
