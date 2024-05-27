@@ -153,4 +153,21 @@ export class ProjectsService {
       }) as Observable<gallery>;
   }
 
+
+  DeleteProjectMaterial = (id : number | undefined, user : string) : void => {
+    const apiUrl = this.baseUrl + id;
+    const queryParams = new HttpParams()
+    .set('user', user);
+    console.log('delete service');
+    console.log(queryParams);
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    this.http.delete(apiUrl,
+                         { headers, 
+                           params : queryParams
+                         },
+                      ).subscribe(); 
+
+  }
+
+
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
-import { GalleriaModule } from 'primeng/galleria';
+import { Galleria, GalleriaModule } from 'primeng/galleria';
 import { ProjectsService } from '../projects.service';
 import { gallery, galleries, Project } from '../../types';
 import { DialogModule } from 'primeng/dialog';
@@ -12,28 +12,32 @@ import { AvatarModule} from 'primeng/avatar';
   templateUrl: './gallery.component.html',
   styleUrl: './gallery.component.scss'
 })
-export class GalleryComponent {
+export class GalleryComponent implements OnInit{
   
   @Input() display : boolean = false;
   @Input() project!: Project;
   @Input() header : string = "";
   @Output() valueChange = new EventEmitter<boolean>();
   @Output() displayChange = new EventEmitter<boolean>();
+   
 
   projectId : number | undefined; 
   images: any = [];
   responsiveOptions: any[] | undefined;
-  
+  activeIndex : number = 0 ;
   constructor(private projectsService: ProjectsService) {}
 
+  ngOnInit(): void {
+    let _gallery = document.getElementById("galleryContainer");
+  }
   ngOnChanges() {
-
-    this.projectId = 2;   
+    this.images = [];
+    this.activeIndex = 0;
+    this.projectId = this.project?.id == undefined ? 0 : this.project?.id;
     console.log('gallery id : '  + this.projectId);
     this.projectsService.getGalleryImages(this.projectId).subscribe((data : any) => 
         { 
-            this.images = data  
-            console.log('data :' + this.images);
+            this.images = data ;
         }); 
     
         this.responsiveOptions = [

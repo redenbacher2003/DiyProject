@@ -19,7 +19,11 @@ import {
 import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
 import { AgGridAngular, AgGridModule } from 'ag-grid-angular';
 import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DialogModule } from 'primeng/dialog';
+import { TooltipModule } from 'primeng/tooltip';
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
 
 let gridApi: GridApi<ProjectMaterial>;
@@ -34,12 +38,22 @@ let gridApi: GridApi<ProjectMaterial>;
     AgGridModule,
     AgGridAngular,
     ToastModule,
+    ReactiveFormsModule,
+    ConfirmDialogModule,
+    DialogModule,
+    TooltipModule
   ],
-  providers: [MessageService],
+  providers: [MessageService, ConfirmationService],
   templateUrl: './project-detail.component.html',
   styleUrl: './project-detail.component.scss',
 })
 export class ProjectDetailComponent {
+  constructor(
+    private projectService: ProjectsService,
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService
+  ) {}
+
   @Input() project!: Project;
   @Output()
   public SelectProjectMaterialFromParent: EventEmitter<ProjectMaterial> =
@@ -82,16 +96,13 @@ export class ProjectDetailComponent {
   displayEditMaterial: boolean = false;
   displayAddMaterial: boolean = false;
   editProjectHeader: string = 'Edit Material';
-  constructor(
-    private projectService: ProjectsService,
-    private messageService: MessageService
-  ) {}
-
-  ngOnChanges() {
+  amount : number = 0;
+  ngOnChanges() {   
     this.isEditDisabled = true;
     this.rowData = [];
     this.DiyProjectView().subscribe((data: ProjectMaterials) => {
       this.rowData = data;
+      this.amount = data.items.reduce((sum, current) => sum + current.amount, 0.00)
     });
   }
 
@@ -111,7 +122,6 @@ export class ProjectDetailComponent {
     this.projectMaterial = fromChildProjectMaterial;
     this.SelectProjectMaterialFromParent.emit(this.projectMaterial);
     this.displayEditMaterial = true;
-    console.log('edit triggered');
   }
 
   onselectionChange(event: any) {
@@ -140,6 +150,36 @@ export class ProjectDetailComponent {
     this.editProjectHeader = this.detailHeader;
     this.displayEditMaterial = true;
     this.isEditDisabled = true;
+  }
+
+  deleteMaterial(event: Event) {
+
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: 'Are sure you wish to delete : ' + this.projectMaterial.materialName.trim() + '?',
+      header: 'Confirmation',
+      icon: 'none',
+      acceptIcon: 'none',
+      rejectIcon: 'none',
+      rejectButtonStyleClass: 'p-button-text',
+      accept: () => {
+        this.projectService.DeleteProjectMaterial(
+          this.projectMaterial.Id,
+          'Reden'
+        );
+        
+        setTimeout(() => {
+          this.ngOnChanges();
+          this.messageService.add({
+            severity: 'info',
+            summary: 'info',
+            detail: 'Project Material Deleted!',
+          });
+        }, 10);
+
+      },
+      reject: () => {},
+    });
   }
 
   materialCallBack(event: any) {

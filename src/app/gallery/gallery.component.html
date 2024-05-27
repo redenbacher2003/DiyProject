@@ -4,23 +4,25 @@
     [modal] = "true" 
     [closable]= "true"
     (onHide)="cancel()"
-    [responsive]="true"
-    class="galleryContainer">
+    [responsive]="true">
     <ng-template pTemplate="header">
         <div class="inline-flex align-items-center justify-content-center gap-2">           
             <p-avatar 
                         icon="pi pi-image"
                         shape="circle" />
-            <span class="font-bold white-space-nowrap">End Table</span>
+            <span class="font-bold white-space-nowrap">{{project.Name}}</span>
+            <span>{{activeIndex + 1}} of {{this.images.length}}</span>
         </div>
     </ng-template>
     <div class="gallerywrap">    
         <p-galleria 
+            id="galleryContainer"
             [value]="images" 
             [responsiveOptions]="responsiveOptions" 
             [containerStyle]="{ 'max-width': '500px', 'height' : '100%' }" 
             [numVisible]="5"
-            [showItemNavigators]="true">
+            [showItemNavigators]="true"
+            [(activeIndex)]="activeIndex">
                 <ng-template pTemplate="item" let-item>
                     <img [src]= "getImgSrc(item.image)" style="width: 100%;" />
                 </ng-template>
