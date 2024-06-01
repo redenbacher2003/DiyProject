@@ -7,9 +7,9 @@
     <div class ="column gap-1 form-wrapper" [formGroup] = "projectForm">
         <div class="row gap-05">  
             <span class="p-float-label">
-                <input pInputText id="Name" formControlName="Name" />
-                <label for="Name">Project Name</label>
-             </span>
+                <input pInputText id="Name" formControlName="Name" required/>
+                <label for="Name">Project Name</label>                                    
+            </span>
         </div>
         <div class="row gap-05">
             <label for="StartDate">Start Date</label>
@@ -27,8 +27,15 @@
         </div>
     </div>
     <p-footer>
-        <!--buttons-->
+        <!--buttons
         <button type= "button" pButton icon= "pi pi-check" (click)="onConfirm()" label="Confirm"></button>
         <button type= "button" pButton icon= "pi pi-times" (click)="onCancel()" label="Cancel"></button>
+        -->
+        <div class="card flex justify-content-center gap-2">
+            <p-confirmDialog />
+            <p-button (click)="SaveConfirm($event)" label="Save" [outlined]="false" />
+            <p-button (click)="onCancel()" label="Cancel" severity="secondary" [outlined]="false" />
+        </div>
+
     </p-footer>
 </p-dialog>

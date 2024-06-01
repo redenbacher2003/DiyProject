@@ -56,7 +56,7 @@ export class ProjectComponent {
   }
 
   fetchProjects() {
-    this.projectsService.getProjects().subscribe((projects: any) => {
+    this.projectsService.getProjects().subscribe((projects: Project[]) => {
       this.projectItems = projects;
     });
   }
@@ -86,7 +86,6 @@ export class ProjectComponent {
   toggleEditPopup(project: Project) {
     this.project = project;
     this.displayPopup = true;
-    console.log('edit was triggered');
   }
 
   toggleGallery(project: Project) {

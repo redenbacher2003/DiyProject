@@ -17,16 +17,16 @@ export class ProjectsService {
 
   constructor(private http: HttpClient) {}
 
-  getProjects = () : Observable<Projects> => { 
+  getProjects = () : Observable<Project[]> => { 
    
     const apiUrl = this.baseUrl + 'GetProjects/';
 
     return this.http.get(apiUrl, { 
       responseType : 'json'
-    }) as Observable<Projects>;
+    }) as Observable<Project[]>;
   }
 
-  getProjectMaterialsByDiyProjectId = (diyProjectId : number) : Observable<ProjectMaterials> => {
+  getProjectMaterialsByDiyProjectId = (diyProjectId : number) : Observable<ProjectMaterial[]> => {
     const apiUrl = this.baseUrl + 'GetMaterialsByProjectId_Async/';  
     let queryParams = new HttpParams();
     queryParams = queryParams.append('diyProjectId', diyProjectId); // Append the 'id' 
@@ -34,7 +34,7 @@ export class ProjectsService {
                                  { responseType : 'json',
                                   params : queryParams
                                  } 
-                        ) as Observable<ProjectMaterials>;
+                        ) as Observable<ProjectMaterial[]>;
   }
 
   getProjectMaterialByMaterialId = (MaterialId : number) : Observable<ProjectMaterial> => {

@@ -3,7 +3,7 @@
   <p-button icon="pi pi-pencil" pTooltip="Edit Material" [rounded]="false" [raised]="true" [disabled] = "isEditDisabled" (onClick)="editMaterial()"></p-button>
   <p-button icon="pi pi-trash" pTooltip="Delete Material" [rounded]="false" [raised]="true" [disabled] = "isEditDisabled" (onClick)="deleteMaterial($event)"></p-button>
   <h2 class="detail-band">{{detailHeader}}</h2>
-  <h2 class="detail-band project-amount">{{this.amount}}</h2>
+  <h2 class="detail-band project-amount"><span style="color :#1c80cf">Total : {{this.amount|currency }}</span></h2>
 </div>
 <p-toast />
 <ag-grid-angular class="ag-theme-quartz" 

@@ -6,6 +6,7 @@ import {
   FormsModule,
   ReactiveFormsModule,
   NgModel,
+  Validators,
 } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
@@ -13,6 +14,9 @@ import { Project } from '../../types';
 import { CalendarModule } from 'primeng/calendar';
 import { InputTextModule } from 'primeng/inputtext';
 import { ProjectsService } from '../projects.service';
+import { ConfirmationService } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ValidationErrors, ValidatorFn, Validator } from '@angular/forms';
 
 @Component({
   selector: 'app-project-edit',
@@ -25,12 +29,14 @@ import { ProjectsService } from '../projects.service';
     CalendarModule,
     FormsModule,
     InputTextModule,
+    ConfirmDialogModule
   ],
+  providers: [ConfirmationService],
   templateUrl: './project-edit.component.html',
   styleUrl: './project-edit.component.scss',
 })
 export class ProjectEditComponent {
-  constructor(private projectsService: ProjectsService) {}
+  constructor(private projectsService: ProjectsService, private confirmationService: ConfirmationService) {}
 
   @Input() project!: Project;
   @Input() display: boolean = false;
@@ -40,14 +46,29 @@ export class ProjectEditComponent {
 
   isEdit: boolean = true;
   projectForm = new FormGroup({
-    Name: new FormControl(''),
-    StartDate: new FormControl(''),
-    FinishDate: new FormControl(''),
+    Name: new FormControl('', {validators : [Validators.required]}),
+    StartDate: new FormControl('', Validators.required),
+    FinishDate: new FormControl('', Validators.required),
     thumbnail: new FormControl(''),
   });
 
+  SaveConfirm(event: Event) {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: "Save project " + this.project?.Name,
+      header: 'Confirmation',
+      icon: 'none',
+      acceptIcon: 'none',
+      rejectIcon: 'none',
+      rejectButtonStyleClass: 'p-button-text',
+      accept: () => {
+        this.onConfirm();
+      },
+      reject: () => {},
+    });
+  }
   onConfirm() {
-    console.log('edit triggered');
+    
     this.project.Name = this.projectForm.get('Name')?.value || '';
     this.project.StartDate = this.projectForm.get('StartDate')?.value || '';
     this.project.FinishDate = this.projectForm.get('FinishDate')?.value || '';

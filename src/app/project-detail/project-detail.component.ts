@@ -24,6 +24,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogModule } from 'primeng/dialog';
 import { TooltipModule } from 'primeng/tooltip';
+import { CurrencyPipe } from '@angular/common';
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
 
 let gridApi: GridApi<ProjectMaterial>;
@@ -41,7 +42,8 @@ let gridApi: GridApi<ProjectMaterial>;
     ReactiveFormsModule,
     ConfirmDialogModule,
     DialogModule,
-    TooltipModule
+    TooltipModule,
+    CurrencyPipe
   ],
   providers: [MessageService, ConfirmationService],
   templateUrl: './project-detail.component.html',
@@ -86,7 +88,7 @@ export class ProjectDetailComponent {
 
   public detailHeader: string = '';
   projectId: number = 0;
-  diyProjectmaterials!: ProjectMaterials;
+  diyProjectmaterials: ProjectMaterial[] = [];
   diyProjectMaterial: ProjectMaterial[] = [];
   rowData!: any;
   pagination: boolean = true;
@@ -97,21 +99,26 @@ export class ProjectDetailComponent {
   displayAddMaterial: boolean = false;
   editProjectHeader: string = 'Edit Material';
   amount : number = 0;
+
   ngOnChanges() {   
     this.isEditDisabled = true;
     this.rowData = [];
-    this.DiyProjectView().subscribe((data: ProjectMaterials) => {
-      this.rowData = data;
-      this.amount = data.items.reduce((sum, current) => sum + current.amount, 0.00)
+    this.DiyProjectView().subscribe((data: ProjectMaterial[]) => {      
+     this.rowData = data;
+     console.log(data);
+      this.amount = data.reduce((accumulator, currentValue) => accumulator + (currentValue.amount * currentValue.quantity), 0);
     });
   }
 
+  computeTotal(sum : number, num : number)  : number {
+    return sum + num;
+  }
   DiyProjectView() {
-    var subject = new Subject<ProjectMaterials>();
+    var subject = new Subject<ProjectMaterial[]>();
     this.detailHeader = this.project?.Name ?? '';
     this.projectService
       .getProjectMaterialsByDiyProjectId(this.project?.id ?? 0)
-      .subscribe((materials: ProjectMaterials) => {
+      .subscribe((materials: ProjectMaterial[]) => {
         this.diyProjectmaterials = materials;
         subject.next(this.diyProjectmaterials);
       });
