@@ -1,43 +1,53 @@
 .imgAbout {
     display : flex;
-    gap : 15px;
-   
-}
-
+    gap : 20px;
+    padding : 10px;
+    border-radius: 10px;
+} 
 .aboutTop {
  
     display : flex;
-    flex : 0 0 40%;
     justify-content: center;
     align-items: center;
     
     .aboutImg {
         display: block;
-        max-width: 90%;
+        max-width: 100%;
         border-radius: 10px;
         padding : 10px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         justify-self: center;
+        background-color: white;
     }  
-    
-}
 
-.aboutRight {
-    color:rgb(2, 2, 2);
-    flex : 0 0 60%;
-    max-width: 60%;
-    padding-left: 10px;
-    line-height: 17px;
-    border-radius: 10px;
-    font-size: 13px;
-}
+} 
+
+
 .pi {
     margin-top: 10px;
     padding-left: 4px;
 }
 
 
-.xx
-{
-    width : 200px;
+
+:host ::ng-deep {     
+   .p-dialog { 
+      width: 50%;        
+    } 
+
+    .p-dialog-header { 
+        background-color: rgb(94, 161, 94);         
+    } 
+
+    .p-dialog-title {
+        font-weight: bolder;
+    }
+    
+}
+.More {
+    color : rgb(94, 161, 94);
+}
+.subText {
+    color : rgb(94, 161, 94); 
+    font-size: small;
 }

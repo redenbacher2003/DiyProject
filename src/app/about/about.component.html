@@ -2,17 +2,20 @@
     [(visible)] = "display"
     modal="true"
     closable="true"
-    header="about me"
+    header="Reden Bayot"
     (onHide)="cancel()"
-    [responsive]="true">
+    [responsive]="true"
+    closeIcon="pi pi-eject"
+    >
     <div class="imgAbout">
         <div class="aboutTop">           
             <img class ="aboutImg" [src]="aboutImg">
         </div>
         <div class="aboutRight">
             <h4>Angular is fun!</h4>
-            <p>An awesome diy'er, you gotta see my projects! Building websites</p> 
-            <p>using Angular and C# with Sql. Regularly updates gitHub.</p>           
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut lacus arcu. Donec non lacus metus. Cras mollis urna nec tincidunt accumsan. Phasellus vel quam ornare, mollis magna non, pharetra tortor. Integer in sapien in lectus dignissim lobortis eget ac mi.</p>
+            <h5 class="More">More!</h5>
+            <p class ="subText">Phasellus sem metus, bibendum sed convallis eget, sagittis id neque. In laoreet varius velit tristique placerat. Sed suscipit ligula sit amet leo tristique, ac varius nunc faucibus. Maecenas finibus ipsum et ligula hendrerit venenatis. Duis commodo lobortis mattis.</p>        
         </div>           
     </div>
     <p-footer>
@@ -20,7 +23,6 @@
         <i class="pi pi-facebook"></i>
         <i class="pi pi-github"></i>
         <i class="pi pi-linkedin"></i>
-        <i class="pi pi-envelope"></i>
-      
+        <i class="pi pi-envelope"></i>      
     </p-footer>
 </p-dialog>

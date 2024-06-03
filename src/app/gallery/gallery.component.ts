@@ -3,7 +3,7 @@ import { Galleria, GalleriaModule } from 'primeng/galleria';
 import { ProjectsService } from '../projects.service';
 import { gallery, galleries, Project } from '../../types';
 import { DialogModule } from 'primeng/dialog';
-import { AvatarModule} from 'primeng/avatar';
+import { AvatarModule} from 'primeng/avatar'
 
 @Component({
   selector: 'app-gallery',
