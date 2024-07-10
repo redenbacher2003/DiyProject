@@ -4,7 +4,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { Project } from '../../types';
 import { ProjectsService } from '../projects.service';
 import { CarouselModule } from 'primeng/carousel';
-import { HttpClientModule } from '@angular/common/http';
+import {} from '@angular/common/http';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule, NgModel } from '@angular/forms';
@@ -19,7 +19,6 @@ import { GalleryComponent } from '../gallery/gallery.component';
     ProjectItemComponent,
     NgFor,
     CarouselModule,
-    HttpClientModule,
     InputTextModule,
     ButtonModule,
     FormsModule,

@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { LeftpaneComponent } from './leftpane/leftpane.component';
 import { ProjectComponent } from './project/project.component';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
-import { HttpClientModule } from '@angular/common/http';
+import {} from '@angular/common/http';
 import { Project } from '../types';
 import { ProjectsService } from './projects.service';
 
@@ -14,8 +14,7 @@ import { ProjectsService } from './projects.service';
     RouterOutlet,
     LeftpaneComponent,
     ProjectComponent,
-    ProjectDetailComponent,
-    HttpClientModule,
+    ProjectDetailComponent    
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
