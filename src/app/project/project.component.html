@@ -15,7 +15,7 @@
     <div class="headerBody">
         <p-carousel [value]="projectItems" [numVisible]="4" [numScroll]="1" [circular]="true" [responsiveOptions]="carouselResponsiveOptions">
             <ng-template let-projectItem pTemplate="item">
-                <div *ngIf="projectItem?.Name?.includes(this.searchValue) || this.searchValue === ''" class="projectItemContainer">
+                <div *ngIf="projectItem?.Name?.toLowerCase().includes(this.searchValue.toLowerCase()) || this.searchValue === ''" class="projectItemContainer">
                     <div class="perProjectItem">
                         <app-project-item [project] = "projectItem" (SelectedProject) = "onSelected($event)" (editProject)="toggleEditPopup($event)" (viewGallery)="toggleGallery($event)"></app-project-item>
                     </div>
